@@ -1,3 +1,5 @@
+# 这是类似YOLO的模型配置方式
+
 backbone:
   # [from, module, args]
   - [-1, StemBlock, [16, 16, True]] # 0-P2/4

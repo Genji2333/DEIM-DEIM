@@ -5,7 +5,7 @@ evaluator: # 指标
   iou_types: ['bbox', ]
 
 num_classes: 1 # your dataset classes
-remap_mscoco_category: False 
+remap_mscoco_category: True
 
 train_dataloader:
   type: DataLoader
@@ -20,7 +20,7 @@ train_dataloader:
   shuffle: True
   num_workers: 4
   drop_last: True
-  pin_memory: True
+  pin_memory: False
   collate_fn:
     type: BatchImageCollateFunction
 
@@ -39,7 +39,7 @@ val_dataloader:
   shuffle: False
   num_workers: 4
   drop_last: False
-  pin_memory: True
+  pin_memory: False
   collate_fn:
     type: BatchImageCollateFunction
 

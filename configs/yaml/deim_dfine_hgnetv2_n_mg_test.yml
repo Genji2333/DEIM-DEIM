@@ -10,7 +10,7 @@ output_dir: ./outputs/deim_hgnetv2_n_custom
 model: DEIM_MG
 
 DEIM_MG:
-  yaml_path: configs/cfg/dfine-n.yaml # 这个很重要
+  yaml_path: configs/cfg-improve/dfine-n-test.yaml # 这个很重要
 
 optimizer:
   type: AdamW

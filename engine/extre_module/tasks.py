@@ -25,6 +25,8 @@ from engine.extre_module.custom_nn.block.RepHMS import RepHMS
 from engine.extre_module.custom_nn.block.MANet import MANet  
 from engine.extre_module.custom_nn.neck_module.HyperCompute import HyperComputeModule
 from engine.extre_module.custom_nn.transformer.DAttention import DAttention    
+from engine.extre_module.custom_nn.conv_module.awtconv2d import AWTConv2d
+from engine.extre_module.custom_nn.conv_module.wtconv2d import WTConv2d
 from engine.extre_module.custom_nn.transformer.AdaptiveSparseSA import AdaptiveSparseSA   
 from engine.extre_module.custom_nn.transformer.PolaLinearAttention import PolaLinearAttention     
 from engine.extre_module.custom_nn.neck_module.HyperACE import HyperACE, FullPAD_Tunnel, DownsampleConv  
@@ -217,6 +219,9 @@ def parse_module(d, i, f, m, args, ch, nc=None, eval_spatial_size=None):
     elif m in {ContrastDrivenFeatureAggregation, DownsampleConv}: # attention    
         c2 = ch[f]     
         args = [c2, *args]
+    elif m in {AWTConv2d, WTConv2d}:
+        c1, c2 = ch[f], args[0]   
+        args = [c1, c2, *args[1:]] 
     elif m in {PSConv, ADown, Conv}: # Conv
         c1, c2 = ch[f], args[0]  
         args = [c1, c2, *args[1:]]
