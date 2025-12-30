@@ -33,7 +33,6 @@ class SplicingModule(nn.Module):
         super(SplicingModule, self).__init__()
         
         self.num_inputs = len(inc)
-        self.total_channels = sum(inc)
         
         # Channel alignment - convert all inputs to same dimension
         self.channel_align = nn.ModuleList([])
