@@ -67,7 +67,7 @@ def main(args, ) -> None:
             solver.val_onnx_engine(args.mode)
         else:
             if args.eval_wda:
-                data_root = '/home/wyq/wyq/DEIM-DEIM/data/gwhd_2021/test_domain'
+                data_root = 'data/gwhd_2021/test_domain' # data/gwhd_2021/test_stage
                 solver.val_wda(data_root)
             else:
                 solver.val()

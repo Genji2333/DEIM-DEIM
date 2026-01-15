@@ -1,4 +1,5 @@
 
+# 这是默认的基础数据处理配置。
 train_dataloader:
   dataset:
     transforms:

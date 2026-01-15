@@ -1,7 +1,7 @@
 
 train_dataloader:
   dataset:
-    transforms:
+    transforms: # 数据增强
       ops:
         - {type: RandomPhotometricDistort, p: 0.5}
         - {type: RandomZoomOut, fill: 0}
@@ -12,12 +12,12 @@ train_dataloader:
         - {type: SanitizeBoundingBoxes, min_size: 1}
         - {type: ConvertPILImage, dtype: 'float32', scale: True}
         - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
-      policy:
+      policy: # 数据增强的策略，从72轮开始，停止下面的增强
         name: stop_epoch
         epoch: 72 # epoch in [71, ~) stop `ops`
         ops: ['RandomPhotometricDistort', 'RandomZoomOut', 'RandomIoUCrop']
 
-  collate_fn:
+  collate_fn: # 这个是将多个照片形成一个batch的时候进行的操作
     type: BatchImageCollateFunction
     base_size: 640
     base_size_repeat: 3

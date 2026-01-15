@@ -1,3 +1,10 @@
+# 这个是dfine的整个训练的配置，包括
+# 1. 任务
+# 2. 模型
+# 3. 标准（比如损失，指标）
+# 4. 后处理（模型推理后，过滤低置信度的框，将模型输出整理成适合任务的形式
+# 5. 数据
+# 6. 训练流程（轮数，学习率，优化器）
 task: detection
 
 model: DEIM
@@ -8,19 +15,19 @@ use_focal_loss: True
 eval_spatial_size: [640, 640] # h w
 checkpoint_freq: 4    # save freq
 
-DEIM:
+DEIM: # 模型
   backbone: HGNetv2
   encoder: HybridEncoder
   decoder: DFINETransformer
 
 # Add, default for step lr scheduler 
-lrsheduler: flatcosine
+lrsheduler: flatcosine # 学习率
 lr_gamma: 1
-warmup_iter: 500
+warmup_iter: 500 # 学习率热身
 flat_epoch: 4000000
 no_aug_epoch: 0
 
-HGNetv2:
+HGNetv2: # 主干模型
   pretrained: False
   local_model_dir: ./weight/hgnetv2/
 
@@ -74,10 +81,10 @@ DFINETransformer:
   dim_feedforward: 1024
 
 PostProcessor:
-  num_top_queries: 300
+  num_top_queries: 300 # 只取前300个框
 
 
-DEIMCriterion:
+DEIMCriterion: # 损失，匹配器
   weight_dict: {loss_vfl: 1, loss_bbox: 5, loss_giou: 2, loss_fgl: 0.15, loss_ddf: 1.5}
   losses: ['vfl', 'boxes', 'local']
   alpha: 0.75

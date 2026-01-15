@@ -1,0 +1,31 @@
+__include__: [
+  '../dataset/custom_detection.yml',
+  '../runtime.yml',
+  '../base/dataloader_dfine.yml',
+  '../base/optimizer.yml',
+  '../base/dfine_hgnetv2.yml',
+  '../base/common.yml'
+]
+
+output_dir: ./outputs/dfine-n-test
+
+
+DEIM_MG: # 重点在这里，模型，用哪个模型
+  yaml_path: configs/cfg-improve/dfine-n-test.yaml
+
+
+# Increase to search for the optimal ema
+epoches: 160 # 148 + 4n
+train_dataloader:
+  total_batch_size: 8
+  dataset:
+    transforms:
+      policy:
+        epoch: 148
+  collate_fn:
+    stop_epoch: 148
+    ema_restart_decay: 0.9999
+    base_size_repeat: ~
+
+val_dataloader:
+  total_batch_size: 8
